@@ -1,26 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import Hero from "./Hero";
 
 export default function OpenInvitation() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  if (!open) {
+  if (!isOpen) {
     return (
-      <div className="h-screen flex items-center justify-center bg-black text-white">
+      <main className="h-screen w-screen flex items-center justify-center bg-black text-white">
         <button
-          onClick={() => setOpen(true)}
-          className="border px-8 py-4 text-xl tracking-widest"
+          onClick={() => setIsOpen(true)}
+          className="border border-white px-10 py-4 text-xl tracking-[0.3em] hover:bg-white hover:text-black transition"
         >
           ABRIR INVITACIÓN
         </button>
-      </div>
+      </main>
     );
   }
 
-  return (
-    <div className="h-screen flex items-center justify-center">
-      Invitación abierta 🎉
-    </div>
-  );
+  return <Hero />;
 }
