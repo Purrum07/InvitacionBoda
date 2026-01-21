@@ -54,6 +54,7 @@ export default function Hero() {
             </section>
             <Countdown />
             <ParentsAndGodparents />
+            <EventDetails/>
 
         </>
 
@@ -63,3 +64,4 @@ export default function Hero() {
 
 import Countdown from "./Countdown";
 import ParentsAndGodparents from "./ParentsAndGodparents";
+import EventDetails from "./EventDetails";
