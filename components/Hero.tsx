@@ -12,6 +12,7 @@ export default function Hero() {
     return (
         <>
             <section
+                id="hero"
                 className="relative h-screen w-full bg-cover bg-center flex items-center justify-center"
                 style={{ backgroundImage: "url('/images/IMG_20220917_165855851.jpg')" }}
             >
@@ -55,6 +56,11 @@ export default function Hero() {
             <Countdown />
             <ParentsAndGodparents />
             <EventDetails/>
+            <Timeline/>
+            <DressCode/>
+            <FAQ/>
+            <GiftRegistry/>
+            <RSVP/>
 
         </>
 
@@ -65,3 +71,10 @@ export default function Hero() {
 import Countdown from "./Countdown";
 import ParentsAndGodparents from "./ParentsAndGodparents";
 import EventDetails from "./EventDetails";
+import Timeline from "./Timeline";
+import DressCode from "./DressCode";
+import FAQ from "./FAQ";
+import GiftRegistry from "./GiftRegistry";
+import RSVP from "./RSVP";
+
+
