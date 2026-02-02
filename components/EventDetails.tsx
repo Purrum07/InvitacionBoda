@@ -1,69 +1,81 @@
 export default function EventDetails() {
   return (
-    <section className="py-24 bg-neutral-100 px-6">
-      <h2 className="text-3xl md:text-4xl text-center mb-16 font-[var(--font-playfair)] text-neutral-900">
-        Detalles del día
-      </h2>
-
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Ceremonia */}
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-8">
-            <h3 className="text-2xl mb-4 font-[var(--font-playfair)] text-neutral-600">
-              Ceremonia Religiosa
-            </h3>
-
-            <p className="mb-2 font-medium text-neutral-700">
-              Parroquia del Inmaculado Corazón de María | Chihuahua
-            </p>
-
-            <p className="mb-2 text-neutral-700">
-              🕔 4:00 PM
-            </p>
-
-            <p className="mb-6 text-neutral-600">
-              Calle Chac-Mool 1201, Nacional, 31120 Chihuahua, Chih.
-            </p>
-          </div>
-
-          <iframe
-            src="https://www.google.com/maps?q=Parroquia%del%Inmaculado%Corazón%de%Maria&output=embed"
-            className="w-full h-64 border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-
-          
+    <section className="py-32 px-6 bg-[#FAFAF9]">
+      <div className="max-w-6xl mx-auto">
+        {/* Título */}
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-[#1C1C1C] mb-6">
+            Detalles del día
+          </h2>
+          <div className="w-24 h-px bg-[#C6A15B] mx-auto" />
         </div>
 
-        {/* Recepción */}
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-8">
-            <h3 className="text-2xl mb-4 font-[var(--font-playfair)] text-neutral-600">
-              Recepción
-            </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <EventCard
+            title="Ceremonia Religiosa"
+            place="Parroquia del Inmaculado Corazón de María"
+            time="4:00 PM"
+            address="Calle Chac-Mool 1201, Nacional, 31120 Chihuahua, Chih."
+            map="https://www.google.com/maps?q=Parroquia%20del%20Inmaculado%20Corazón%20de%20María&output=embed"
+          />
 
-            <p className="mb-2 font-medium text-neutral-700">
-              Quinta San Gabriel
-            </p>
-
-            <p className="mb-2 text-neutral-700">
-              🕖 9:00 PM
-            </p>
-
-            <p className="mb-6 text-neutral-600">
-              C. Sierra magisterial 6100, Los Nogales, 31380 Chihuahua, Chih.
-            </p>
-          </div>
-
-          <iframe
-            src="https://www.google.com/maps?q=Quinta%San%Gabriel&output=embed"
-            className="w-full h-64 border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+          <EventCard
+            title="Recepción"
+            place="Quinta San Gabriel"
+            time="9:00 PM"
+            address="C. Sierra Magisterial 6100, Los Nogales, 31380 Chihuahua, Chih."
+            map="https://www.google.com/maps?q=Quinta%20San%20Gabriel&output=embed"
           />
         </div>
       </div>
     </section>
+  );
+}
+
+function EventCard({
+  title,
+  place,
+  time,
+  address,
+  map,
+}: {
+  title: string;
+  place: string;
+  time: string;
+  address: string;
+  map: string;
+}) {
+  return (
+    <div className="bg-white rounded-3xl overflow-hidden border border-neutral-200">
+      {/* Info */}
+      <div className="p-10">
+        <h3 className="text-2xl font-[var(--font-playfair)] text-[#1C1C1C] mb-6">
+          {title}
+        </h3>
+
+        <p className="text-lg font-medium text-neutral-800 mb-2">
+          {place}
+        </p>
+
+        <p className="text-sm tracking-wide text-[#C6A15B] mb-4">
+          {time}
+        </p>
+
+        <p className="text-sm text-neutral-600 leading-relaxed">
+          {address}
+        </p>
+      </div>
+
+      {/* Mapa */}
+      <div className="relative">
+        <iframe
+          src={map}
+          className="w-full h-64 border-0 grayscale-[20%]"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <div className="absolute inset-0 bg-white/10 pointer-events-none" />
+      </div>
+    </div>
   );
 }

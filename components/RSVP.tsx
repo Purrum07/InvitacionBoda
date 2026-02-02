@@ -1,99 +1,96 @@
 "use client";
 
+interface RSVPProps {
+  onConfirm: () => void;
+}
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-
-export default function RSVP() {
-  const router = useRouter();
-  const [confirmed, setConfirmed] = useState(false);
-
+export default function RSVP({ onConfirm }: RSVPProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/gracias");
+    onConfirm();
   };
 
   return (
-    <section className="py-24 bg-white px-6">
-      <h2 className="text-3xl md:text-4xl text-center mb-12 font-[var(--font-playfair)] text-neutral-900">
-        Confirmación de asistencia
-      </h2>
+    <section className="py-36 px-6 bg-white">
+      {/* Header */}
+      <div className="text-center mb-24">
+        <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-neutral-900 mb-6">
+          Confirmación de asistencia
+        </h2>
+        <div className="w-24 h-px bg-[#C6A15B] mx-auto mb-8" />
+        <p className="max-w-xl mx-auto text-neutral-600 text-lg leading-relaxed">
+          Será un honor contar con tu presencia en este día tan especial.
+          <br />
+          Por favor, ayúdanos confirmando tu asistencia.
+        </p>
+      </div>
 
-      {!confirmed ? (
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-xl mx-auto space-y-6"
-        >
+      {/* Form Card */}
+      <div className="max-w-2xl mx-auto bg-neutral-50 rounded-3xl border border-neutral-200 p-12 md:p-16">
+        <form onSubmit={handleSubmit} className="space-y-10">
+          {/* Nombre */}
           <div>
-            <label className="block mb-2 text-sm text-neutral-700">
-              Nombre completo
+            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
+              NOMBRE COMPLETO
             </label>
             <input
               required
               type="text"
-              className="w-full border border-neutral-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-900 text-neutral-900"
+              className="w-full bg-white border border-neutral-300 rounded-full px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
             />
           </div>
 
+          {/* Asistencia */}
           <div>
-            <label className="block mb-2 text-sm text-neutral-700">
-              ¿Asistirás al evento?
+            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
+              CONFIRMACIÓN
             </label>
             <select
               required
-              className="w-full border border-neutral-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-900 text-neutral-900 "
+              className="w-full bg-white border border-neutral-300 rounded-full px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
             >
-              <option value="" className="text-neutral-900">Selecciona una opción</option>
-              <option value="yes" className="text-neutral-900">Sí, con gusto asistiré</option>
-              <option value="no" className="text-neutral-900">Lamentablemente no podré asistir</option>
+              <option value="">Selecciona una opción</option>
+              <option value="yes">Sí, con gusto asistiré</option>
+              <option value="no">Lamentablemente no podré asistir</option>
             </select>
           </div>
 
+          {/* Personas */}
           <div>
-            <label className="block mb-2 text-sm text-neutral-700 ">
-              Número de personas
+            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
+              NÚMERO DE PERSONAS
             </label>
             <input
               type="number"
               min={1}
               max={5}
               defaultValue={1}
-              className="w-full border border-neutral-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-900 text-neutral-900"
+              className="w-full bg-white border border-neutral-300 rounded-full px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
             />
           </div>
 
+          {/* Mensaje */}
           <div>
-            <label className="block mb-2 text-sm text-neutral-700">
-              Mensaje (opcional)
+            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
+              MENSAJE (OPCIONAL)
             </label>
             <textarea
               rows={3}
-              className="w-full border border-neutral-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-900 text-neutral-900"
+              className="w-full bg-white border border-neutral-300 rounded-2xl px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full py-4 bg-neutral-900 text-white rounded-xl hover:bg-neutral-800 transition"
-          >
-            Confirmar asistencia
-          </button>
+          {/* Submit */}
+          <div className="pt-6">
+            <button
+              type="submit"
+              className="w-full py-5 rounded-full bg-neutral-900 text-white tracking-widest text-sm transition hover:bg-neutral-800"
+            >
+              CONFIRMAR ASISTENCIA
+            </button>
+          </div>
         </form>
-      ) : (
-        <div className="mt-20 py-32 bg-cover bg-center text-center text-white rounded-3xl"
-          style={{ backgroundImage: "url('/images/DSCF0065.jpg')" }}
-        >
-          <h3 className="text-3xl font-[var(--font-playfair)] mb-6">
-            ¡Gracias por confirmar!
-          </h3>
-          <p className="max-w-xl mx-auto text-lg leading-relaxed ">
-            En los próximos días recibirás tu pase y la mesa asignada.
-            <br />
-            ¡Estamos felices de compartir este día contigo!
-          </p>
-        </div>
-      )}
+      </div>
     </section>
   );
 }

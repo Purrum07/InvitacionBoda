@@ -19,14 +19,14 @@ const faqs = [
       "La invitación es válida únicamente para las personas indicadas."
   },
   {
-    question: "¿Habrá código de vestimenta?",
+    question: "¿Existe código de vestimenta?",
     answer:
       "Sí, el evento es de vestimenta formal."
   },
   {
     question: "¿Es un evento solo para adultos?",
     answer:
-      "Sí, agradecemos su comprensión ya que el evento es solo para adultos."
+      "Sí, agradecemos su comprensión ya que el evento es exclusivamente para adultos."
   }
 ];
 
@@ -34,38 +34,54 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-white px-6">
-      <h2 className="text-3xl md:text-4xl text-center mb-16 font-[var(--font-playfair)] text-neutral-900">
-        Preguntas frecuentes
-      </h2>
+    <section className="py-32 px-6 bg-white">
+      {/* Header */}
+      <div className="text-center mb-24">
+        <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-neutral-900 mb-6">
+          Preguntas frecuentes
+        </h2>
+        <div className="w-24 h-px bg-[#C6A15B] mx-auto" />
+      </div>
 
-      <div className="max-w-3xl mx-auto space-y-4">
-        {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="border border-neutral-200 rounded-xl overflow-hidden"
-          >
-            <button
-              onClick={() =>
-                setOpenIndex(openIndex === index ? null : index)
-              }
-              className="w-full text-left px-6 py-5 flex justify-between items-center bg-neutral-50 hover:bg-neutral-100 transition"
+      {/* FAQ List */}
+      <div className="max-w-3xl mx-auto space-y-6">
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+
+          return (
+            <div
+              key={index}
+              className="border border-neutral-200 rounded-2xl overflow-hidden transition"
             >
-              <span className="text-neutral-900 font-medium">
-                {faq.question}
-              </span>
-              <span className="text-neutral-600 text-xl">
-                {openIndex === index ? "−" : "+"}
-              </span>
-            </button>
+              <button
+                onClick={() => setOpenIndex(isOpen ? null : index)}
+                className="w-full flex justify-between items-center px-8 py-6 bg-neutral-50 hover:bg-neutral-100 transition"
+              >
+                <span className="text-lg font-[var(--font-playfair)] text-neutral-900 text-left">
+                  {faq.question}
+                </span>
 
-            {openIndex === index && (
-              <div className="px-6 py-4 bg-white text-neutral-600 leading-relaxed">
-                {faq.answer}
+                <span
+                  className={`text-2xl transition-transform duration-300 ${
+                    isOpen ? "rotate-45 text-[#C6A15B]" : "text-neutral-500"
+                  }`}
+                >
+                  +
+                </span>
+              </button>
+
+              <div
+                className={`px-8 overflow-hidden transition-all duration-500 ease-in-out ${
+                  isOpen ? "max-h-40 py-6" : "max-h-0"
+                }`}
+              >
+                <p className="text-neutral-600 leading-relaxed">
+                  {faq.answer}
+                </p>
               </div>
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

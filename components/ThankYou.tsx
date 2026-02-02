@@ -1,30 +1,35 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+interface ThankYouProps {
+  onBack: () => void;
+}
 
-export default function ThankYou() {
-  const router = useRouter();
-
+export default function ThankYou({ onBack }: ThankYouProps) {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-neutral-900 text-white px-6 animate-fade-in-up">
-      <div className="text-center ">
-        <h1 className="text-4xl md:text-5xl font-[var(--font-playfair)] mb-6">
+    <section
+      className="fixed inset-0 flex items-center justify-center text-center px-6"
+      style={{
+        backgroundImage: "url('/images/DSCF0065.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="bg-white/80 backdrop-blur-md px-10 py-16 rounded-3xl max-w-xl animate-fade-in">
+        <h2 className="text-4xl font-[var(--font-playfair)] text-neutral-900 mb-6">
           ¡Gracias por confirmar!
-        </h1>
+        </h2>
 
-        <p className="max-w-xl mx-auto text-lg text-neutral-200 mb-12 leading-relaxed">
-          Nos llena de alegría saber que nos acompañarás en este día tan especial.
-          <br />
-          En los próximos días recibirás tu pase y la mesa asignada.
+        <p className="text-neutral-700 mb-10">
+          En unos días recibirás tu pase y la mesa asignada.
         </p>
 
         <button
-          onClick={() => router.push("/")}
-          className="px-10 py-4 border border-white rounded-full hover:bg-white hover:text-neutral-900 transition"
+          onClick={onBack}
+          className="px-10 py-4 border border-neutral-900 text-neutral-900 rounded-full hover:bg-neutral-900 hover:text-white transition"
         >
           Volver al inicio
         </button>
       </div>
-    </main>
+    </section>
   );
 }

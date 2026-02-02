@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Playfair_Display, Montserrat } from "next/font/google";
+import "@/styles/fonts.css"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],

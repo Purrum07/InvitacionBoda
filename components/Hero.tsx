@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-export default function Hero() {
+interface HeroProps {
+    onConfirm: () => void;
+}
+
+export default function Hero({onConfirm}: HeroProps) {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -60,7 +64,8 @@ export default function Hero() {
             <DressCode/>
             <FAQ/>
             <GiftRegistry/>
-            <RSVP/>
+            
+            <RSVP onConfirm={onConfirm}/>
 
         </>
 

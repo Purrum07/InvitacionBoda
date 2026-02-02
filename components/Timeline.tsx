@@ -1,50 +1,62 @@
 const events = [
-  { time: "4:30 PM", title: "Llegada de invitados", icon: "💐" },
-  { time: "5:00 PM", title: "Ceremonia religiosa", icon: "⛪" },
-  { time: "6:15 PM", title: "Sesión de fotos", icon: "📸" },
-  { time: "7:00 PM", title: "Recepción", icon: "🥂" },
-  { time: "8:30 PM", title: "Cena", icon: "🍽️" },
-  { time: "9:30 PM", title: "Primer baile", icon: "💃🕺" },
-  { time: "10:00 PM", title: "Fiesta", icon: "🎉" },
+  { time: "4:30 PM", title: "Llegada de invitados" },
+  { time: "5:00 PM", title: "Ceremonia religiosa" },
+  { time: "6:15 PM", title: "Sesión de fotos" },
+  { time: "7:00 PM", title: "Recepción" },
+  { time: "8:30 PM", title: "Cena" },
+  { time: "9:30 PM", title: "Primer baile" },
+  { time: "10:00 PM", title: "Fiesta" },
 ];
 
 export default function Timeline() {
   return (
-    <section className="py-24 bg-white px-6">
-    <h2 className="text-3xl md:text-4xl text-center mb-16 font-[var(--font-playfair)] text-neutral-900">
-      Programa del día
-    </h2>
+    <section className="py-32 px-6 bg-white">
+      {/* Header */}
+      <div className="text-center mb-24">
+        <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-[#1C1C1C] mb-6">
+          Programa del día
+        </h2>
+        <div className="w-24 h-px bg-[#C6A15B] mx-auto" />
+      </div>
 
-    <div className="max-w-3xl mx-auto relative">
-      {/* Línea vertical al centro (fondo) */}
-      <div className="absolute left-1/2 top-0 h-full w-px bg-neutral-200 -translate-x-1/2 z-0" />
+      <div className="max-w-4xl mx-auto relative">
+        {/* Línea central */}
+        <div className="absolute left-1/2 top-0 h-full w-px bg-[#C6A15B]/40 -translate-x-1/2" />
 
-      <ul className="space-y-14 relative z-10">
-        {events.map((event, index) => (
-          <li
-  key={index}
-  className="flex flex-col items-center text-center"
->
-  {/* Punto */}
-  <span className="w-4 h-4 bg-neutral-900 rounded-full mb-4" />
+        <ul className="space-y-24 relative">
+          {events.map((event, index) => {
+            const isLeft = index % 2 === 0;
 
-  {/* Hora con fondo */}
-  <div className="bg-white px-4 py-1 mb-2">
-    <p className="text-sm text-neutral-600">
-      {event.time}
-    </p>
-  </div>
+            return (
+              <li
+                key={index}
+                className={`relative flex ${
+                  isLeft ? "justify-start pr-12" : "justify-end pl-12"
+                }`}
+              >
+                {/* Punto */}
+                <span className="absolute left-1/2 top-6 w-4 h-4 bg-[#C6A15B] rounded-full -translate-x-1/2 z-10" />
 
-  {/* Evento con fondo */}
-  <div className="bg-white px-6 py-2">
-    <p className="text-lg font-medium text-neutral-900">
-      {event.icon} {event.title}
-    </p>
-  </div>
-</li>
-        ))}
-      </ul>
-    </div>
-  </section>
+                {/* Card */}
+                <div
+                  className={`
+                    max-w-sm bg-white border border-neutral-200 rounded-2xl px-8 py-6
+                    ${isLeft ? "text-right" : "text-left"}
+                  `}
+                >
+                  <p className="text-sm tracking-wide text-[#C6A15B] mb-2">
+                    {event.time}
+                  </p>
+
+                  <p className="text-lg font-[var(--font-playfair)] text-neutral-900">
+                    {event.title}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
   );
 }

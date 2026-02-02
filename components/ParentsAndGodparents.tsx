@@ -1,59 +1,37 @@
+"use client";
+
 export default function ParentsAndGodparents() {
   return (
-    <section className="py-24 bg-white text-center px-6 text-neutral-900">
-      <h2 className="text-3xl md:text-4xl mb-16 font-[var(--font-playfair)]">
-        Con la bendición de nuestros padres
-      </h2>
+    <section className="py-32 px-6 bg-[#FAFAF9]">
+      <div className="max-w-5xl mx-auto text-center">
+        {/* Título */}
+        <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-[#1C1C1C] mb-6">
+          Con la bendición de nuestros padres
+        </h2>
 
-      <div className="max-w-4xl mx-auto space-y-14">
-        {/* Padres Novia */}
-        <div>
-          <p className="uppercase tracking-widest text-sm mb-4 text-neutral-600">
-            Padres de la Novia
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Blanca Imelda López Robledo
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Gilberto Reyes Gómez
-          </p>
-        </div>
+        <div className="w-24 h-px bg-[#C6A15B] mx-auto mb-16"></div>
 
-        {/* Padres Novio */}
-        <div>
-          <p className="uppercase tracking-widest text-sm mb-4 text-neutral-600">
-            Padres del Novio
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Blanca Estela Montes Arrieta
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Mario Alberto Márquez Montes
-          </p>
-        </div>
+        {/* Padres */}
+        <div className="grid md:grid-cols-2 gap-16 mb-24">
+          <div>
+            <h3 className="uppercase tracking-[0.3em] text-sm text-[#5A5A5A] mb-6 font-montserrat">
+              Padres de la novia
+            </h3>
+            <p className="text-xl text-[#1C1C1C] font-[var(--font-playfair)]">
+              Gilberto Reyes Gómez <br />
+              Blanca Imelda López Robledo
+            </p>
+          </div>
 
-        {/* Padrinos */}
-        <div>
-          <p className="uppercase tracking-widest text-sm mb-4 text-neutral-600">
-            Padrinos
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Maribel Reyes Gómez
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Javier Ortíz
-          </p>
-        </div>
-        <div>
-          <p className="uppercase tracking-widest text-sm mb-4 text-neutral-600">
-            Padrinos
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Hilda Isabel Moontes Arrieta
-          </p>
-          <p className="text-xl md:text-2xl font-medium">
-            Daniel Adame
-          </p>
+          <div>
+            <h3 className="uppercase tracking-[0.3em] text-sm text-[#5A5A5A] mb-6 font-montserrat">
+              Padres del novio
+            </h3>
+            <p className="text-xl text-[#1C1C1C] font-[var(--font-playfair)]">
+              Mario Alberto Márquez Montes<br />
+              Blanca Estela Montes Arrieta
+            </p>
+          </div>
         </div>
       </div>
     </section>
