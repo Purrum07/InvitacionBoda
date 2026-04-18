@@ -35,6 +35,9 @@ export default function Hero({ onConfirm, onOpen }: HeroProps) {
     const handleOpen = () => {
         if (opened) return;
 
+        requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        });
         setOpened(true);
         onOpen();
 
@@ -58,7 +61,7 @@ export default function Hero({ onConfirm, onOpen }: HeroProps) {
             >
                 <section
                     className="relative h-screen w-full bg-cover bg-center flex items-center justify-center"
-                    style={{ backgroundImage: "url('/images/Hero.jpg')" }}
+                    style={{ backgroundImage: "url('/images/Hero.webp')" }}
                 >
                     <div className="absolute inset-0 bg-black/50" />
 
@@ -84,7 +87,7 @@ export default function Hero({ onConfirm, onOpen }: HeroProps) {
                             “En el amor no hay temor, sino que el amor perfecto echa fuera el
                             temor.”
                             <br />
-                            <span className="text-sm tracking-widest opacity-80">
+                            <span className="text-lg tracking-widest opacity-80">
                                 (1 Juan 4,18)
                             </span>
                         </p>

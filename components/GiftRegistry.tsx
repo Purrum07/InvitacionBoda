@@ -75,7 +75,7 @@ export default function GiftRegistry() {
             boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
           }}
           transition={{ duration: 0.4 }}
-          href="https://www.amazon.com.mx"
+          href="https://www.amazon.com.mx/wedding/guest-view/6AET9OC207CS"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative rounded-3xl border p-14 text-center transition-all duration-700 backdrop-blur-md overflow-hidden"

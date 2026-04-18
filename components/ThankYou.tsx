@@ -28,7 +28,7 @@ export default function ThankYou({ onBack }: ThankYouProps) {
     <section
       className="fixed inset-0 flex items-center justify-center text-center px-6"
       style={{
-        backgroundImage: "url('/images/final3.jpg')",
+        backgroundImage: "url('/images/final3.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -43,7 +43,7 @@ export default function ThankYou({ onBack }: ThankYouProps) {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative px-10 py-16 rounded-3xl max-w-xl w-full shadow-2xl border"
         style={{
-          backgroundColor: "rgba(255,255,255,0.55)", // 🔥 más transparente
+          backgroundColor: "rgba(255,255,255,0.85)", // 🔥 más transparente
           borderColor: "rgba(85,107,47,0.25)",
         }}
       >
@@ -63,8 +63,8 @@ export default function ThankYou({ onBack }: ThankYouProps) {
 
         {/* Texto */}
         <p
-          className={`${cormorant.className} text-lg leading-relaxed mb-10`}
-          style={{ color: PRIMARY, opacity: 0.9 }}
+          className={`${cormorant.className} text-xl leading-relaxed mb-10`}
+          style={{ color: PRIMARY, opacity: 1 }}
         >
           En unos días recibirás tu pase y la mesa asignada.
         </p>
@@ -72,11 +72,7 @@ export default function ThankYou({ onBack }: ThankYouProps) {
         {/* Botón */}
         <button
           onClick={onBack}
-          className={`${montserrat.className} px-10 py-4 rounded-full text-sm tracking-[0.25em] border transition-all duration-700 hover:bg-[#556B2F] hover:text-white hover:shadow-xl`}
-          style={{
-            borderColor: PRIMARY,
-            color: PRIMARY,
-          }}
+          className={`${montserrat.className} px-10 py-4 rounded-full text-sm tracking-[0.25em] border border-[#556B2F] text-[#556B2F] transition-all duration-700 hover:bg-[#556B2F] hover:text-white hover:shadow-xl`}
         >
           VOLVER AL INICIO
         </button>

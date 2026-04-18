@@ -100,14 +100,14 @@ export default function Timeline() {
                 {/* TEXTO */}
                 <div className="space-y-2">
                   <p
-                    className={`${montserrat.className} uppercase tracking-[0.25em] text-sm`}
+                    className={`${montserrat.className} uppercase tracking-[0.25em] text-lg`}
                     style={{ color: PRIMARY }}
                   >
                     {event.time}
                   </p>
 
                   <p
-                    className={`${playfair.className} text-xl sm:text-2xl`}
+                    className={`${playfair.className} text-lg sm:text-2xl`}
                     style={{ color: PRIMARY }}
                   >
                     {event.title}

@@ -140,7 +140,7 @@ function EventSection({
           {place}
         </p>
 
-        <p className={`${montserrat.className} uppercase tracking-[0.25em] text-sm text-[#556B2F]`}>
+        <p className={`${montserrat.className} uppercase tracking-[0.25em] text-lg text-[#556B2F]`}>
           {time}
         </p>
 

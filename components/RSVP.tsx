@@ -104,7 +104,7 @@ export default function RSVP({ onConfirm }: RSVPProps) {
         />
 
         <p
-          className={`${cormorant.className} max-w-xl mx-auto text-lg leading-relaxed`}
+          className={`${cormorant.className} max-w-xl mx-auto text-xl leading-relaxed`}
           style={{ color: PRIMARY, opacity: 0.8 }}
         >
           Será un honor contar con tu presencia en este día tan especial.
