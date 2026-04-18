@@ -1,35 +1,86 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { Playfair_Display, Cormorant_Garamond, Montserrat } from "next/font/google";
+
+const playfair = Playfair_Display({ subsets: ["latin"] });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["italic"],
+});
+
 interface ThankYouProps {
   onBack: () => void;
 }
+
+/* Color principal */
+const PRIMARY = "#556B2F";
 
 export default function ThankYou({ onBack }: ThankYouProps) {
   return (
     <section
       className="fixed inset-0 flex items-center justify-center text-center px-6"
       style={{
-        backgroundImage: "url('/images/DSCF0065.jpg')",
+        backgroundImage: "url('/images/final3.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="bg-white/80 backdrop-blur-md px-10 py-16 rounded-3xl max-w-xl animate-fade-in">
-        <h2 className="text-4xl font-[var(--font-playfair)] text-neutral-900 mb-6">
+      {/* Overlay SIN blur */}
+      <div className="absolute inset-0 bg-black/30" />
+
+      {/* Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 40 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative px-10 py-16 rounded-3xl max-w-xl w-full shadow-2xl border"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.55)", // 🔥 más transparente
+          borderColor: "rgba(85,107,47,0.25)",
+        }}
+      >
+        {/* Título */}
+        <h2
+          className={`${playfair.className} text-4xl md:text-5xl mb-6`}
+          style={{ color: PRIMARY }}
+        >
           ¡Gracias por confirmar!
         </h2>
 
-        <p className="text-neutral-700 mb-10">
+        {/* Línea */}
+        <div
+          className="w-20 h-px mx-auto mb-8 opacity-60"
+          style={{ backgroundColor: PRIMARY }}
+        />
+
+        {/* Texto */}
+        <p
+          className={`${cormorant.className} text-lg leading-relaxed mb-10`}
+          style={{ color: PRIMARY, opacity: 0.9 }}
+        >
           En unos días recibirás tu pase y la mesa asignada.
         </p>
 
+        {/* Botón */}
         <button
           onClick={onBack}
-          className="px-10 py-4 border border-neutral-900 text-neutral-900 rounded-full hover:bg-neutral-900 hover:text-white transition"
+          className={`${montserrat.className} px-10 py-4 rounded-full text-sm tracking-[0.25em] border transition-all duration-700 hover:bg-[#556B2F] hover:text-white hover:shadow-xl`}
+          style={{
+            borderColor: PRIMARY,
+            color: PRIMARY,
+          }}
         >
-          Volver al inicio
+          VOLVER AL INICIO
         </button>
-      </div>
+      </motion.div>
     </section>
   );
 }

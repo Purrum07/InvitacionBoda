@@ -7,11 +7,24 @@ export default function AudioController() {
 
   const play = () => {
     if (!audioRef.current) {
-      audioRef.current = new Audio("/audio/song.mp3");
-      audioRef.current.loop = true;
+      const audio = new Audio("/audio/song.mp3");
+
+      audio.loop = true;           // 🔥 LOOP ACTIVADO
+      audio.volume = 0.7;          // opcional (mejor UX)
+      
+      audioRef.current = audio;
     }
-    audioRef.current.play();
+
+    audioRef.current
+      .play()
+      .catch(() => {
+        // evita error si el navegador bloquea autoplay
+      });
   };
 
-  return { play };
+  const pause = () => {
+    audioRef.current?.pause();
+  };
+
+  return { play, pause };
 }

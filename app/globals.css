@@ -44,3 +44,78 @@ body {
 .animate-fade-in-up {
   animation: fadeInUp 1.2s ease-out forwards;
 }
+
+
+@font-face {
+  font-family: "TanGarland";
+  src: url("/public/fonts/TAN-Garland-Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.curtain {
+  height: 100%;
+  width: 100%;
+  background: #f6f4f0; /* color del telón */
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* PLIEGUES REALISTAS */
+.curtain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: repeating-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 10px,
+    rgba(255, 255, 255, 0.08) 10px,
+    rgba(255, 255, 255, 0.08) 20px
+  );
+
+  opacity: 0.5;
+}
+
+/* SOMBRA INTERIOR (centro) */
+.curtain-left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.3));
+}
+
+.curtain-right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to left, transparent, rgba(0,0,0,0.3));
+}
+
+/* FORMA CURVA */
+.curtain-left {
+  clip-path: ellipse(120% 100% at 0% 50%);
+}
+
+.curtain-right {
+  clip-path: ellipse(120% 100% at 100% 50%);
+}
+
+
+.plane {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.plane img {
+  display: none;
+}

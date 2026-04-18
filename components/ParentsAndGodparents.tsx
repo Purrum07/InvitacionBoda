@@ -1,39 +1,108 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { Playfair_Display, Montserrat } from "next/font/google";
+import { Variants } from "framer-motion";
+
+const playfair = Playfair_Display({ subsets: ["latin"] });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
 export default function ParentsAndGodparents() {
   return (
-    <section className="py-32 px-6 bg-[#FAFAF9]">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Título */}
-        <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-[#1C1C1C] mb-6">
-          Con la bendición de nuestros padres
-        </h2>
+    <section
+      className="py-32 px-6"
+      style={{
+        backgroundColor: "#f6f4f0",
+      }}
+    >
+      <div className="max-w-4xl mx-auto text-center">
 
-        <div className="w-24 h-px bg-[#C6A15B] mx-auto mb-16"></div>
+        {/* Título */}
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className={`${playfair.className} text-4xl md:text-5xl text-[#556B2F] mb-6`}
+        >
+          Con la bendición de Dios y el amor de nuestros padres
+        </motion.h2>
+
+        {/* Línea decorativa */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.4, ease: "easeOut", delay: 0.3 }}
+          viewport={{ once: true }}
+          className="w-24 h-px bg-[#556B2F] mx-auto mb-16 opacity-60 origin-center"
+        ></motion.div>
 
         {/* Padres */}
-        <div className="grid md:grid-cols-2 gap-16 mb-24">
-          <div>
-            <h3 className="uppercase tracking-[0.3em] text-sm text-[#5A5A5A] mb-6 font-montserrat">
-              Padres de la novia
-            </h3>
-            <p className="text-xl text-[#1C1C1C] font-[var(--font-playfair)]">
-              Gilberto Reyes Gómez <br />
-              Blanca Imelda López Robledo
-            </p>
-          </div>
+        <motion.div
+          className="text-center space-y-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 1.1, // más pausado y elegante
+                delayChildren: 0.4
+              }
+            }
+          }}
+        >
+          <AnimatedText text="Mario Alberto Márquez Delgado" />
+          <AnimatedText text="&" small />
+          <AnimatedText text="Blanca Estela Montes Arrieta" />
 
-          <div>
-            <h3 className="uppercase tracking-[0.3em] text-sm text-[#5A5A5A] mb-6 font-montserrat">
-              Padres del novio
-            </h3>
-            <p className="text-xl text-[#1C1C1C] font-[var(--font-playfair)]">
-              Mario Alberto Márquez Montes<br />
-              Blanca Estela Montes Arrieta
-            </p>
-          </div>
-        </div>
+          <div className="h-6"></div>
+
+          <AnimatedText text="Gilberto Reyes Gómez" />
+          <AnimatedText text="&" small />
+          <AnimatedText text="Blanca Imelda López Robledo" />
+        </motion.div>
+
       </div>
     </section>
+  );
+}
+
+/* ───────────────────────── */
+
+function AnimatedText({
+  text,
+  small = false
+}: {
+  text: string;
+  small?: boolean;
+}) {
+
+  const item: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  return (
+    <motion.p
+      variants={item}
+      className={`${montserrat.className} ${small
+          ? "text-base text-[#556B2F]/70"
+          : "text-base sm:text-lg md:text-2xl text-[#556B2F]"
+        }`}
+    >
+      {text}
+    </motion.p>
   );
 }

@@ -1,62 +1,149 @@
+"use client";
+
+import { motion, Variants } from "framer-motion";
+import { Playfair_Display, Montserrat } from "next/font/google";
+
+const playfair = Playfair_Display({ subsets: ["latin"] });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+/* Color principal */
+const PRIMARY = "#556B2F";
+
+/* Eventos con imagen */
 const events = [
-  { time: "4:30 PM", title: "Llegada de invitados" },
-  { time: "5:00 PM", title: "Ceremonia religiosa" },
-  { time: "6:15 PM", title: "Sesión de fotos" },
-  { time: "7:00 PM", title: "Recepción" },
-  { time: "8:30 PM", title: "Cena" },
-  { time: "9:30 PM", title: "Primer baile" },
-  { time: "10:00 PM", title: "Fiesta" },
+  { time: "4:00 PM", title: "Misa", image: "/images/misa.jpg" },
+  { time: "9:15 PM", title: "Llegada de invitados", image: "/images/invitados.jpg" },
+  { time: "9:45 PM", title: "Entrada de novios", image: "/images/entrada.jpg" },
+  { time: "10:00 PM", title: "Primer baile", image: "/images/baile.jpg" },
+  { time: "10:30 PM", title: "Brindis", image: "/images/brindis.jpg" },
+  { time: "11:00 PM", title: "Fiesta", image: "/images/fiesta.jpg" },
 ];
 
 export default function Timeline() {
   return (
-    <section className="py-32 px-6 bg-white">
-      {/* Header */}
-      <div className="text-center mb-24">
-        <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-[#1C1C1C] mb-6">
-          Programa del día
-        </h2>
-        <div className="w-24 h-px bg-[#C6A15B] mx-auto" />
-      </div>
+    <section className="py-32 px-6 bg-[#f6f4f0]">
 
-      <div className="max-w-4xl mx-auto relative">
-        {/* Línea central */}
-        <div className="absolute left-1/2 top-0 h-full w-px bg-[#C6A15B]/40 -translate-x-1/2" />
+      {/* HEADER */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="text-center mb-24"
+      >
+        <h2
+          className={`${playfair.className} text-4xl sm:text-5xl mb-6`}
+          style={{ color: PRIMARY }}
+        >
+          Itinerario
+        </h2>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.4, ease: "easeOut", delay: 0.3 }}
+          viewport={{ once: true }}
+          className="w-24 h-px mx-auto opacity-60 origin-center"
+          style={{ backgroundColor: PRIMARY }}
+        />
+      </motion.div>
+
+      {/* CONTENEDOR */}
+      <motion.div
+        className="max-w-2xl mx-auto relative"
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+
+        {/* Línea animada */}
+        <motion.div
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 origin-top"
+          style={{ backgroundColor: PRIMARY, opacity: 0.3 }}
+        />
 
         <ul className="space-y-24 relative">
-          {events.map((event, index) => {
-            const isLeft = index % 2 === 0;
+          {events.map((event, index) => (
+            <motion.li
+              key={index}
+              variants={item}
+              className="relative flex flex-col items-center text-center"
+            >
 
-            return (
-              <li
-                key={index}
-                className={`relative flex ${
-                  isLeft ? "justify-start pr-12" : "justify-end pl-12"
-                }`}
-              >
-                {/* Punto */}
-                <span className="absolute left-1/2 top-6 w-4 h-4 bg-[#C6A15B] rounded-full -translate-x-1/2 z-10" />
+              {/* CONTENIDO */}
+              <div className="relative z-10 bg-[#f6f4f0] px-6 py-4 rounded-xl">
 
-                {/* Card */}
-                <div
-                  className={`
-                    max-w-sm bg-white border border-neutral-200 rounded-2xl px-8 py-6
-                    ${isLeft ? "text-right" : "text-left"}
-                  `}
-                >
-                  <p className="text-sm tracking-wide text-[#C6A15B] mb-2">
+                {/* IMAGEN */}
+                <div className="mb-4 flex justify-center">
+                  <div className="w-12 h-max sm:w-14 sm:h-max overflow-hidden">
+                    <motion.img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                      initial={{ scale: 1.2, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
+                </div>
+
+                {/* TEXTO */}
+                <div className="space-y-2">
+                  <p
+                    className={`${montserrat.className} uppercase tracking-[0.25em] text-sm`}
+                    style={{ color: PRIMARY }}
+                  >
                     {event.time}
                   </p>
 
-                  <p className="text-lg font-[var(--font-playfair)] text-neutral-900">
+                  <p
+                    className={`${playfair.className} text-xl sm:text-2xl`}
+                    style={{ color: PRIMARY }}
+                  >
                     {event.title}
                   </p>
                 </div>
-              </li>
-            );
-          })}
+
+              </div>
+
+            </motion.li>
+          ))}
         </ul>
-      </div>
+      </motion.div>
     </section>
   );
 }
+
+/* Animaciones */
+
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.9, // más lento y elegante
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.2,
+      ease: "easeOut",
+    },
+  },
+};

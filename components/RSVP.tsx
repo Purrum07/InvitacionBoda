@@ -1,53 +1,170 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import { Playfair_Display, Cormorant_Garamond, Montserrat } from "next/font/google";
+
+const playfair = Playfair_Display({ subsets: ["latin"] });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["italic"],
+});
+
 interface RSVPProps {
   onConfirm: () => void;
 }
 
+/* Color principal */
+const PRIMARY = "#556B2F";
+
 export default function RSVP({ onConfirm }: RSVPProps) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // 🔥 nuevo estado
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onConfirm();
+
+    setIsLoading(true);
+
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+
+      const payload = {
+        nombre: formData.get("nombre"),
+        asistencia: formData.get("asistencia"),
+        personas: formData.get("personas"),
+        mensaje: formData.get("mensaje"),
+        userAgent: navigator.userAgent,
+      };
+
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbwjSb8OjamYPVnzmUcUfLO3a1J7nNvqWccCfHzclqRjls9r0AKjcBfQoQITFzURhVN36g/exec",
+        {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setErrorMessage("Ya tenemos tu confirmación 🤍 ¡Gracias!");
+        setShowModal(true);
+        return;
+      }
+
+      onConfirm();
+
+    } catch (error) {
+      setErrorMessage("Hubo un problema al enviar tu confirmación");
+      setShowModal(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <section className="py-36 px-6 bg-white">
+    <section className="py-36 px-6 bg-[#f6f4f0]">
+
       {/* Header */}
-      <div className="text-center mb-24">
-        <h2 className="text-4xl md:text-5xl font-[var(--font-playfair)] text-neutral-900 mb-6">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="text-center mb-24"
+      >
+        <h2
+          className={`${playfair.className} text-4xl md:text-5xl mb-6`}
+          style={{ color: PRIMARY }}
+        >
           Confirmación de asistencia
         </h2>
-        <div className="w-24 h-px bg-[#C6A15B] mx-auto mb-8" />
-        <p className="max-w-xl mx-auto text-neutral-600 text-lg leading-relaxed">
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.4, ease: "easeOut", delay: 0.3 }}
+          viewport={{ once: true }}
+          className="w-24 h-px mx-auto mb-8 opacity-60 origin-center"
+          style={{ backgroundColor: PRIMARY }}
+        />
+
+        <p
+          className={`${cormorant.className} max-w-xl mx-auto text-lg leading-relaxed`}
+          style={{ color: PRIMARY, opacity: 0.8 }}
+        >
           Será un honor contar con tu presencia en este día tan especial.
           <br />
           Por favor, ayúdanos confirmando tu asistencia.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Form Card */}
-      <div className="max-w-2xl mx-auto bg-neutral-50 rounded-3xl border border-neutral-200 p-12 md:p-16">
+      {/* Form */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="max-w-2xl mx-auto rounded-3xl p-12 md:p-16 backdrop-blur-md border shadow-lg"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.65)",
+          borderColor: "rgba(85,107,47,0.25)",
+        }}
+      >
         <form onSubmit={handleSubmit} className="space-y-10">
+
           {/* Nombre */}
           <div>
-            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
-              NOMBRE COMPLETO
+            <label
+              className={`${montserrat.className} block mb-3 text-sm tracking-widest`}
+              style={{ color: PRIMARY, opacity: 0.7 }}
+            >
+              Nombre completo
             </label>
             <input
               required
+              name="nombre"
               type="text"
-              className="w-full bg-white border border-neutral-300 rounded-full px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
+              className="w-full rounded-full px-6 py-4 focus:outline-none transition-all duration-300 focus:ring-2 focus:ring-[#556B2F]/40"
+              style={{
+                border: "1px solid rgba(85,107,47,0.3)",
+                backgroundColor: "rgba(255,255,255,0.85)",
+                color: PRIMARY,
+              }}
             />
           </div>
 
           {/* Asistencia */}
           <div>
-            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
-              CONFIRMACIÓN
+            <label
+              className={`${montserrat.className} block mb-3 text-sm tracking-widest`}
+              style={{ color: PRIMARY, opacity: 0.7 }}
+            >
+              Confirmación
             </label>
             <select
               required
-              className="w-full bg-white border border-neutral-300 rounded-full px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
+              name="asistencia"
+              className={`${montserrat.className} w-full rounded-full px-6 py-4 focus:outline-none transition-all duration-300 focus:ring-2 focus:ring-[#556B2F]/40`}
+              style={{
+                border: "1px solid rgba(85,107,47,0.3)",
+                backgroundColor: "rgba(255,255,255,0.85)",
+                color: PRIMARY,
+              }}
             >
               <option value="">Selecciona una opción</option>
               <option value="yes">Sí, con gusto asistiré</option>
@@ -55,28 +172,23 @@ export default function RSVP({ onConfirm }: RSVPProps) {
             </select>
           </div>
 
-          {/* Personas */}
-          <div>
-            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
-              NÚMERO DE PERSONAS
-            </label>
-            <input
-              type="number"
-              min={1}
-              max={5}
-              defaultValue={1}
-              className="w-full bg-white border border-neutral-300 rounded-full px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
-            />
-          </div>
-
           {/* Mensaje */}
           <div>
-            <label className="block mb-3 text-sm tracking-widest text-neutral-700">
-              MENSAJE (OPCIONAL)
+            <label
+              className={`${montserrat.className} block mb-3 text-sm tracking-widest`}
+              style={{ color: PRIMARY, opacity: 0.7 }}
+            >
+              Mensaje (Opcional)
             </label>
             <textarea
+              name="mensaje"
               rows={3}
-              className="w-full bg-white border border-neutral-300 rounded-2xl px-6 py-4 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C6A15B]"
+              className="w-full rounded-2xl px-6 py-4 focus:outline-none transition-all duration-300 focus:ring-2 focus:ring-[#556B2F]/40"
+              style={{
+                border: "1px solid rgba(85,107,47,0.3)",
+                backgroundColor: "rgba(255,255,255,0.85)",
+                color: PRIMARY,
+              }}
             />
           </div>
 
@@ -84,13 +196,76 @@ export default function RSVP({ onConfirm }: RSVPProps) {
           <div className="pt-6">
             <button
               type="submit"
-              className="w-full py-5 rounded-full bg-neutral-900 text-white tracking-widest text-sm transition hover:bg-neutral-800"
+              disabled={isLoading}
+              className={`${montserrat.className} w-full py-5 rounded-full text-sm tracking-[0.25em] border transition-all duration-700 
+              ${isLoading 
+                ? "opacity-80 cursor-not-allowed" 
+                : "hover:bg-[#556B2F] hover:text-white hover:shadow-xl"
+              }`}
+              style={{
+                borderColor: PRIMARY,
+                color: isLoading ? "#fff" : PRIMARY,
+                backgroundColor: isLoading ? PRIMARY : "transparent",
+              }}
             >
-              CONFIRMAR ASISTENCIA
+              {isLoading ? (
+                <span className="flex items-center justify-center gap-3">
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  ENVIANDO...
+                </span>
+              ) : (
+                "CONFIRMAR ASISTENCIA"
+              )}
             </button>
           </div>
+
         </form>
-      </div>
+      </motion.div>
+
+      {/* MODAL */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="bg-[#f6f4f0] rounded-3xl p-10 max-w-md w-full text-center border shadow-xl"
+              style={{
+                borderColor: "rgba(85,107,47,0.3)",
+              }}
+            >
+              <h3 className="text-2xl mb-4" style={{ color: PRIMARY }}>
+                Aviso
+              </h3>
+
+              <div className="w-16 h-px mx-auto mb-6 opacity-60 bg-[#556B2F]" />
+
+              <p className="mb-8 leading-relaxed" style={{ color: PRIMARY, opacity: 0.8 }}>
+                {errorMessage}
+              </p>
+
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-8 py-3 border text-sm tracking-[0.25em] uppercase transition-all duration-700 hover:bg-[#556B2F] hover:text-white"
+                style={{
+                  borderColor: PRIMARY,
+                  color: PRIMARY,
+                }}
+              >
+                ACEPTAR
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }

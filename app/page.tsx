@@ -1,38 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import OpenInvitation from "@/components/OpenInvitation";
 import Hero from "@/components/Hero";
 import ThankYou from "@/components/ThankYou";
 import AudioController from "@/components/AudioController";
 
-type View = "open" | "hero" | "thankyou";
+type View = "hero" | "thankyou";
 
 export default function Home() {
-  const [view, setView] = useState<View>("open");
+  const [view, setView] = useState<View>("hero");
   const audio = AudioController();
 
   return (
     <>
-      {view === "open" && (
-        <OpenInvitation
-          onOpen={() => {
-            audio.play();       // 🎵 inicia música aquí
-            setView("hero");
-          }}
-        />
-      )}
-
+      {/* HERO CON SOBRE INTEGRADO */}
       {view === "hero" && (
         <Hero
+          onOpen={() => {
+            audio.play(); // 🎵 inicia música cuando abre sobre
+          }}
           onConfirm={() => setView("thankyou")}
         />
       )}
 
+      {/* THANK YOU */}
       {view === "thankyou" && (
-        <ThankYou
-          onBack={() => setView("open")}
-        />
+        <ThankYou onBack={() => setView("hero")} />
       )}
     </>
   );
