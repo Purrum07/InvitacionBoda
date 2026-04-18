@@ -28,7 +28,7 @@ export default function ThankYou({ onBack }: ThankYouProps) {
     <section
       className="fixed inset-0 flex items-center justify-center text-center px-6"
       style={{
-        backgroundImage: "url('/images/final3.webp')",
+        backgroundImage: "url('/images/Final3.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
