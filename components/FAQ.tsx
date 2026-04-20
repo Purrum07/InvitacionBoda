@@ -17,25 +17,30 @@ const PRIMARY = "#556B2F";
 
 const faqs = [
   {
-    question: "¿A qué hora debo llegar?",
-    answer:
-      "Te recomendamos llegar al menos 15 minutos antes del inicio de la ceremonia."
-  },
-  {
     question: "¿Habrá estacionamiento disponible?",
     answer:
       "Sí, el lugar cuenta con estacionamiento para todos los invitados."
   },
   {
-    question: "¿Puedo llevar acompañante?",
+    question: "¿El evento será en interior o exterior?",
     answer:
-      "La invitación es válida únicamente para las personas indicadas."
+      "El evento será en exterior."
   },
   {
-    question: "¿Se permite la entrada a niños?",
+    question: "¿Habrá área para fumadores?",
     answer:
-      "No, es exclusivo para adultos. Muchas gracias por su comprensión."
-  }
+      "Les pedimos de la manera mas atenta fumar fuera de las instalaciones."
+  },
+  {
+    question: "¿Habrá cena durante el evento?",
+    answer:
+      "Durante la celebración contaremos con bocadillos y, al final de la noche, un trasnochado preparado con mucho cariño. No habrá una cena formal."
+  },
+  {
+    question: "¿Qué sucede si no confirmo asistencia?",
+    answer:
+      "Para una mejor organización, es importante confirmar asistencia previamente."
+  },
 ];
 
 export default function FAQ() {

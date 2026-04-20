@@ -125,7 +125,12 @@ export default function GiftRegistry() {
           >
             Liverpool
           </h3>
-
+          <h4
+            className={`${montserrat.className} text-1xl mb-6`}
+            style={{ color: PRIMARY }}
+          >
+            No. de Evento: 51978975
+          </h4>
           <span
             className={`${montserrat.className} inline-block px-10 py-4 border text-sm tracking-widest transition-all duration-700`}
             style={{ borderColor: PRIMARY, color: PRIMARY }}

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Volume2, ChevronDown } from "lucide-react";
 
 const cormorant = Cormorant_Garamond({
     subsets: ["latin"],
@@ -82,12 +83,11 @@ export default function Hero({ onConfirm, onOpen }: HeroProps) {
 
                         {/* CITA */}
                         <p
-                            className={`${cormorant.className} text-lg md:text-xl italic leading-relaxed mb-6 opacity-90`}
+                            className={`${cormorant.className} text-[1.5rem] md:text-[1.6rem] italic leading-relaxed mb-6 opacity-90`}
                         >
-                            “En el amor no hay temor, sino que el amor perfecto echa fuera el
-                            temor.”
+                            “En el amor no hay temor, sino que el amor perfecto echa fuera el temor.”
                             <br />
-                            <span className="text-lg tracking-widest opacity-80">
+                            <span className="text-[1.3rem] md:!text-[1.4rem] tracking-widest opacity-80">
                                 (1 Juan 4,18)
                             </span>
                         </p>
@@ -95,6 +95,9 @@ export default function Hero({ onConfirm, onOpen }: HeroProps) {
                         <p className={`${playfair.className} tracking-[0.3em] uppercase`}>
                             16 · Mayo · 2026
                         </p>
+                    </div>
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
+                        <ChevronDown size={28} className="opacity-80" />
                     </div>
                 </section>
 
@@ -247,8 +250,8 @@ export default function Hero({ onConfirm, onOpen }: HeroProps) {
                             }}
                             className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center z-40 pointer-events-none"
                         >
-                            <p className={`${cormorant.className} text-lg text-[#6b5e4a] italic`}>
-                                Fuiste invitado a nuestra boda
+                            <p className={`${cormorant.className} text-[1.3rem] text-[#6b5e4a] italic`}>
+                                Hoy comienza una historia que queremos celebrar contigo
                             </p>
 
                             <motion.p
@@ -261,6 +264,18 @@ export default function Hero({ onConfirm, onOpen }: HeroProps) {
                             >
                                 Toca para abrir
                             </motion.p>
+                            {/* ✨ HINT SONIDO (más elegante) */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 0.6 }}
+                                transition={{ delay: 1.2, duration: 1 }}
+                                className="flex items-center justify-center gap-2 mt-3"
+                            >
+                                <Volume2 size={14} className="text-[#8a7a63]" />
+                                <span className="text-[10px] tracking-wider text-[#8a7a63] uppercase">
+                                    Sube el volumnen
+                                </span>
+                            </motion.div>
                         </motion.div>
                     </motion.section>
                 )}

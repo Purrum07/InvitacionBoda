@@ -54,7 +54,7 @@ export default function EventDetails() {
         </div>
 
         <EventSection
-          type="Religiosa"
+          type="Ceremonia Religiosa"
           image="/images/church.jpeg"
           place="Parroquia del Inmaculado Corazón de María"
           time="4:00 PM"

@@ -118,25 +118,11 @@ export default function DressCode() {
           }}
         >
           <p
-            className={`${montserrat.className} text-sm tracking-[0.3em] mb-4`}
-            style={{ color: PRIMARY, opacity: 0.7 }}
-          >
-            IMPORTANTE
-          </p>
-
-          <h3
-            className={`${montserrat.className} text-2xl mb-6`}
-            style={{ color: PRIMARY }}
-          >
-            Evento solo para adultos
-          </h3>
-
-          <p
             className={`${montserrat.className} leading-relaxed max-w-sm mx-auto`}
             style={{ color: PRIMARY, opacity: 0.8 }}
           >
-            Con mucho cariño, hemos decidido que este evento
-            sea exclusivamente para adultos.
+            Con mucho cariño hemos preparado esta celebración, por lo que amablemente les pedimos no asistir con niños.
+            Agradecemos mucho su comprensión.
           </p>
         </motion.div>
 
