@@ -31,6 +31,7 @@ export default function AudioController() {
 
       audioRef.current = audio;
     }
+    audioRef.current.currentTime = 0;
 
     audioRef.current.play().catch(() => {});
 

@@ -18,7 +18,7 @@ const smoothEase = [0.4, 0, 0.2, 1] as const;
 const bounceEase = [0.34, 1.56, 0.64, 1] as const;
 
 interface HeroProps {
-    onConfirm: () => void;
+    onConfirm: (asistencia: string) => void;
     onOpen: () => void;
 }
 

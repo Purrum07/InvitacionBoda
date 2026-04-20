@@ -19,7 +19,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 interface RSVPProps {
-  onConfirm: () => void;
+  onConfirm: (asistencia: string) => void;
 }
 
 /* Color principal */
@@ -38,10 +38,11 @@ export default function RSVP({ onConfirm }: RSVPProps) {
     try {
       const form = e.currentTarget;
       const formData = new FormData(form);
+      const asistencia = formData.get("asistencia") as string;
 
       const payload = {
         nombre: formData.get("nombre"),
-        asistencia: formData.get("asistencia"),
+        asistencia,
         personas: formData.get("personas"),
         mensaje: formData.get("mensaje"),
         userAgent: navigator.userAgent,
@@ -61,12 +62,12 @@ export default function RSVP({ onConfirm }: RSVPProps) {
       const data = await res.json();
 
       if (!data.success) {
-        setErrorMessage("Ya tenemos tu confirmación 🤍 ¡Gracias!");
+        setErrorMessage("Ya tenemos tu confirmación 🤍 ¡Gracias! \n En caso de cualquier cambio no dudes en contactarnos.");
         setShowModal(true);
         return;
       }
 
-      onConfirm();
+      onConfirm(asistencia);
 
     } catch (error) {
       setErrorMessage("Hubo un problema al enviar tu confirmación");
@@ -247,17 +248,13 @@ export default function RSVP({ onConfirm }: RSVPProps) {
 
               <div className="w-16 h-px mx-auto mb-6 opacity-60 bg-[#556B2F]" />
 
-              <p className="mb-8 leading-relaxed" style={{ color: PRIMARY, opacity: 0.8 }}>
+              <p className="mb-8 leading-relaxed whitespace-pre-line" style={{ color: PRIMARY, opacity: 0.8 }}>
                 {errorMessage}
               </p>
 
               <button
                 onClick={() => setShowModal(false)}
-                className="px-8 py-3 border text-sm tracking-[0.25em] uppercase transition-all duration-700 hover:bg-[#556B2F] hover:text-white"
-                style={{
-                  borderColor: PRIMARY,
-                  color: PRIMARY,
-                }}
+                className="px-8 py-3 border text-sm tracking-[0.25em] text-[#556B2F] uppercase transition-all duration-700 hover:bg-[#556B2F] hover:text-white"
               >
                 ACEPTAR
               </button>

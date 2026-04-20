@@ -18,12 +18,15 @@ const cormorant = Cormorant_Garamond({
 
 interface ThankYouProps {
   onBack: () => void;
+  asistencia: string;
+  onPauseAudio: () => void;
 }
 
 /* Color principal */
 const PRIMARY = "#556B2F";
 
-export default function ThankYou({ onBack }: ThankYouProps) {
+export default function ThankYou({ onBack, asistencia, onPauseAudio}: ThankYouProps) {
+  const isGoing = asistencia === "yes";
   return (
     <section
       className="fixed inset-0 flex items-center justify-center text-center px-6"
@@ -43,7 +46,7 @@ export default function ThankYou({ onBack }: ThankYouProps) {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative px-10 py-16 rounded-3xl max-w-xl w-full shadow-2xl border"
         style={{
-          backgroundColor: "rgba(255,255,255,0.85)", // 🔥 más transparente
+          backgroundColor: "rgba(255,255,255,0.85)",
           borderColor: "rgba(85,107,47,0.25)",
         }}
       >
@@ -52,7 +55,7 @@ export default function ThankYou({ onBack }: ThankYouProps) {
           className={`${playfair.className} text-4xl md:text-5xl mb-6`}
           style={{ color: PRIMARY }}
         >
-          ¡Gracias por confirmar!
+          {isGoing ? "¡Gracias por confirmar!" : "¡Gracias por avisarnos!"}
         </h2>
 
         {/* Línea */}
@@ -66,12 +69,17 @@ export default function ThankYou({ onBack }: ThankYouProps) {
           className={`${cormorant.className} text-xl leading-relaxed mb-10`}
           style={{ color: PRIMARY, opacity: 1 }}
         >
-          En unos días recibirás tu pase y la mesa asignada.
+          {isGoing
+            ? "En unos días recibirás tu pase y la mesa asignada."
+            : "Lamentamos que no puedas acompañarnos, y agradecemos mucho que nos lo hayas hecho saber."}
         </p>
 
         {/* Botón */}
         <button
-          onClick={onBack}
+          onClick={() => {
+            onPauseAudio(); 
+            onBack();       
+          }}
           className={`${montserrat.className} px-10 py-4 rounded-full text-sm tracking-[0.25em] border border-[#556B2F] text-[#556B2F] transition-all duration-700 hover:bg-[#556B2F] hover:text-white hover:shadow-xl`}
         >
           VOLVER AL INICIO

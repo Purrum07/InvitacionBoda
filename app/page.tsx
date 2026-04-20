@@ -9,23 +9,33 @@ type View = "hero" | "thankyou";
 
 export default function Home() {
   const [view, setView] = useState<View>("hero");
+  const [asistencia, setAsistencia] = useState<string | null>(null);
   const audio = AudioController();
+
 
   return (
     <>
       {/* HERO CON SOBRE INTEGRADO */}
       {view === "hero" && (
         <Hero
+        key={view}
           onOpen={() => {
             audio.play(); // 🎵 inicia música cuando abre sobre
           }}
-          onConfirm={() => setView("thankyou")}
+          onConfirm={(value) => {
+            setAsistencia(value);   // 👈 guardas si es "yes" o "no"
+            setView("thankyou");
+          }}
         />
       )}
 
       {/* THANK YOU */}
       {view === "thankyou" && (
-        <ThankYou onBack={() => setView("hero")} />
+        <ThankYou
+          asistencia={asistencia!}
+          onPauseAudio={audio.pause}
+          onBack={() => setView("hero")}
+        />
       )}
     </>
   );
