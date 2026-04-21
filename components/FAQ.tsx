@@ -34,7 +34,7 @@ const faqs = [
   {
     question: "¿Habrá cena durante el evento?",
     answer:
-      "Durante la celebración contaremos con bocadillos y, al final de la noche, un trasnochado preparado con mucho cariño. No habrá una cena formal."
+      "Durante la celebración contaremos con bocadillos y, al final de la noche, un trasnochado preparado con mucho cariño."
   },
   {
     question: "¿Qué sucede si no confirmo asistencia?",
